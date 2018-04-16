@@ -6,4 +6,4 @@
 2) створення паралельної гілки alternative і редагування README.md;
 
 3) паралельне редагування README.md в гілці master;
-
+4) злиття master i alternative
