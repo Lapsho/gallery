@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php
-  define('title', "title");                                           // Виніс title в константу
-  $imgUrl = "img/damask-dark.png";
+  include "random_image.php";  //підключив random_image.php
 ?>
 <html>
 <head>
@@ -14,42 +13,41 @@
 
   <p class="imglist">
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">  <!--застосував функцію генерування рандомних посилань -->
+        <img src="<?php echo $fetch_precious; ?>" />                      <!--повернув значення з вище застосованої функції (щоб файл, що відкривається співпадав з його іконкою) -->
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-         <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
 
-     <a href="<?php echo $imgUrl; ?>" data-fancybox="images">
-        <img src="<?php echo $imgUrl; ?>" />
+     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
+        <img src="<?php echo $fetch_precious; ?>" />
      </a>
-
   </p>
   
   <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
