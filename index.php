@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <?php
-  include "random_image.php";  //підключив random_image.php
+  include "random_image.php";  									//підключив random_image.php
 ?>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <<?php echo title ?>>Lapsho galery</<?php echo title ?>>            <!-- застосував константу title -->
+  <?php echo title ?>     									     <!-- застосував константу title -->
   <link rel="stylesheet" href="css/style.css">
 
 </head>
