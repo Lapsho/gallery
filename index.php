@@ -12,42 +12,19 @@
 <body>
 
   <p class="imglist">
+  
+     <?php
 
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">  <!--застосував функцію генерування рандомних посилань -->
-        <img src="<?php echo $fetch_precious; ?>" />                      <!--повернув значення з вище застосованої функції (щоб файл, що відкривається співпадав з його іконкою) -->
-     </a>
+     	for($a = 0; $a < 9; $a++){												//використав цикл for для автоматизації виводу зображень
 
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
+    	just_for_lulz($img_arr);												//Застосував функцію генерування рандомних посилань
+ 		echo "<a href=\"" . $fetch_precious . "\" data-fancybox=\"images\">";  
+        echo "<img src=\"" . $fetch_precious . "\" />";     					//повернув значення з вище застосованої функції в межає синтаксису html
+        echo "</a>";
 
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
+     	}
+     ?>
 
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
-
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
-
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
-
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
-
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
-
-     <a href="<?php just_for_lulz($img_arr); ?>" data-fancybox="images">
-        <img src="<?php echo $fetch_precious; ?>" />
-     </a>
   </p>
   
   <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
