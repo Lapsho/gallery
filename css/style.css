@@ -8,45 +8,96 @@ body {
 	padding: 0px;
 }
 
-body p {
+
+.general {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#limit_img{
+	text-align: center;
+}
+
+
+/*адаптивна галерея*/
+.container {
 	width: 80%;
-	height: auto;
-	margin: 40px auto;
+	margin: 30px auto;
+	overflow: hidden;
+}
+ 
+ 
+.container ul li {
+	list-style:none;
+	float: left; 
+	width: 16%;
+	margin: 2% 2% 40px 2%;
+}
+ 
+ 
+ 
+.container ul li { 
+	color: #5d5f5d;
+}
+ 
+.container ul li a img {
+	max-width: 100%;
+}
+ 
+ 
+
+@media only screen and (min-width: 941px) { 
+	
+	.container ul li:nth-child(5n+1) {
+		clear:left;
+	}
+}
+ 
+ 
+ 
+ 
+@media only screen and (min-width: 721px) and (max-width: 941px) { 
+ 
+	.container ul li {
+		width: 21%;
+	}
+
+	.container ul li:nth-child(4n+1){
+		clear: left;
+	}
+}
+ 
+ 
+ 
+@media only screen and (min-width: 531px) and (max-width: 721px){ 
+
+	.container ul li {
+		width: 29.33333%
+	}
+
+	.container ul li:nth-child(3n+1){
+		clear: left;
+	}
+}
+ 
+ 
+ 
+ 
+@media only screen and (min-width: 320px) and (max-width: 531px){  
+	.container ul li {
+		width: 46%;
+	}
+
+	.container ul li:nth-child(2n+1){
+		clear: left;
+	}
 }
 
 
-body p a {
-	float: left;
-	width: 30%;
-	margin: 1%;
 
-}
-
-body p a img{
-	width: 100%;
-}
-
-
-
-@media screen and (min-width:100px) and (max-width:768px) {
-
-	body p {
-		margin: 20px auto;
-	}
-
-	body p a {
-	width: 40%;
-	margin: 5%;
+@media only screen and (max-width: 320px) {
+	.container ul li {
+		width: 96%;
 	}
 }
-
-@media screen and (min-width: 1500px){
-
-	body p {
-	margin: 45px auto;
-	}
-
-	body p a {
-		width: 16%;
-		margin: 2%;
-	}
