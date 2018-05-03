@@ -13,7 +13,7 @@
   <div class="general">
 
     <form id="limit_img" method="GET">
-      <p>Введіть кількість зображень, що потрібно відобразити(максимум <?php echo $limit_img ?>): <input type="number" name="max_num_img" />
+      <p>Введіть кількість зображень, що потрібно відобразити (максимум <?php echo $image_number_limit ?>): <input type="number" min="1" name="num_user_img" value="<?php echo $num_user_img; ?>"/>
 
       <input type="submit" value="завантажити"></p>
     </form>
@@ -22,14 +22,21 @@
         <ul class="imglist">
 
           <?php
-          for($a = 0; $a < $max_num_img; $a++){    //I decided to use exactly this type cycle because. just because
-            fetch_img($img_arr, $a);
-            echo $fetch_precious;
-          }
-          ?>
 
+          foreach($img_arr as $key_inner_arr){
+            fetch_img($key_inner_arr);
+            echo $fetch_precious;
+
+            static $counter;           //when $counter will equal ours limit - cycle will stop
+            $counter++;
+
+            if($counter == $num_user_img){
+              break;
+            } 
+           }
+          ?>
         </ul>
-    </div> 
+    </div>
   </div>
 
 

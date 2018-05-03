@@ -17,36 +17,34 @@ $img_arr = array(                           //Two-Dimensional image Arrays
 
 
 // construction to restrict number the outputs image
-$limit_img = 8;                                  //sets the maximum posible number of images, Now you do not need to manually fix all the values in the design below
-												//fix only one change;
-global $max_num_img;							//if $_GET is set and not bigger the $limit_img then we got desired number of images ($_GET = $max_num_img)
-if(isset($_GET['max_num_img'])){    
-		
-	if($_GET['max_num_img'] < $limit_img){		//else we got default number of images ($limit_img)
-		$max_num_img = $_GET['max_num_img'];	
-	}else{
-		$max_num_img = $limit_img;
-	}
+$image_number_limit = 8;                                  //sets the maximum posible number of images, Now you do not need to manually fix all the values in the design below
+															//fix only one change;
+$num_user_img = 5;										//this is default number of images what will be displayed
 
-}else{
-	$max_num_img = 5;
+//if $_GET is set and not bigger the $image_height_limit then we got desired number of images ($_GET = $max_num_img)
+//if $_GET is bigger that $image_height_limit than she =  $image_height_limit
+// also $_GET cannot be less than 1
+if(isset($_GET['num_user_img']) && ($_GET['num_user_img'] < $image_number_limit)){     
+	$num_user_img = $_GET['num_user_img'];
+}elseif($_GET['num_user_img'] > $image_number_limit){
+	$num_user_img = $image_number_limit;
 }
 
 
 //a function that contains the html syntax. When applied inside the loop, it will be possible to print each individual image
-function fetch_img($array, $key1){ //her needs to convey the name of the array $array and the value of the key $key1
+function fetch_img($sub_array){ //her needs to convey the name of the array $array and the value of the key $key1
 
 global $fetch_precious;   		   //wel be applied outside this function. so there is a need for its global availability
 
 $fetch_precious = "<li>\n";			//in this variable will contain all of our html code. we'll just add to it the all that we needed
-$fetch_precious .= "<a href=\"" . $array[$key1]["href"] . "\"" . " data-fancybox=\"images\">\n";
-$fetch_precious .= "<img src=\"" . $array[$key1]["href"] . "\" alt=\"купи рекламу\">\n";
+$fetch_precious .= "<a href=\"" . $sub_array["href"] . "\"" . " data-fancybox=\"images\">\n";
+$fetch_precious .= "<img src=\"" . $sub_array["href"] . "\" alt=\"купи рекламу\">\n";
 $fetch_precious .= "</a>\n";
-$fetch_precious .= "<h4>" . $array[$key1]["name"] . "</h3>\n";
-$fetch_precious .= "<p>Опис: " . $array[$key1]["description"] . "</p>\n";
-$fetch_precious .= "<p>Розмір: " . $array[$key1]["size"] . " kb</p>\n";
+$fetch_precious .= "<h4>" . $sub_array["name"] . "</h3>\n";
+$fetch_precious .= "<p>Опис: " . $sub_array["description"] . "</p>\n";
+$fetch_precious .= "<p>Розмір: " . $sub_array["size"] . " kb</p>\n";
 $fetch_precious .= "</li>\n";
 
-}
-				
+} 
 ?>
+
