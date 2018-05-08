@@ -11,30 +11,17 @@
 
 <body>
   <div class="general">
-
-    <form id="limit_img" method="GET">
-      <p>Введіть кількість зображень, що потрібно відобразити (максимум <?php echo $image_number_limit ?>): <input type="number" min="1" name="num_user_img" value="<?php echo $num_user_img; ?>"/>
-
-      <input type="submit" value="завантажити"></p>
-    </form>
-
     <div class="container"> 
         <ul class="imglist">
 
-          <?php
-
-          foreach($img_arr as $key_inner_arr){
-            fetch_img($key_inner_arr);
-            echo $fetch_precious;
-
-            static $counter;           //when $counter will equal ours limit - cycle will stop
-            $counter++;
-
-            if($counter == $num_user_img){
-              break;
-            } 
-           }
-          ?>
+         <?php foreach($new_arr as $sub_arr): ?>
+             <li>
+                 <a href="<?php echo $sub_arr['url']; ?>" data-fancybox='mages'>
+                     <img src="<?php echo $sub_arr['url']; ?>" />
+                 </a>
+                 <p><?php echo date('d F Y H:i:s', $sub_arr['timestamp']); ?></p>
+             </li>
+         <?php endforeach; ?>
         </ul>
     </div>
   </div>
