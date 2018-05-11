@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-<?php var_dump($imageArray); ?>
 <body>
   <div class="general">
     <div class="container"> 
@@ -16,8 +15,8 @@
 
          <?php foreach($imageArray as $key => $value): ?>
              <li>
-                 <a href="<?php echo $value['urlImage']; ?>" data-fancybox='mages'>
-                     <img src="<?php echo $value['urlImage']; ?>" />
+                 <a href="<?php echo $value['urlImage']; ?>" data-fancybox='images'>
+                     <img src="<?php echo $value['thumbnail']; ?>" />
                  </a>
                  <p><?php echo $value['time']; ?></p>
              </li>
