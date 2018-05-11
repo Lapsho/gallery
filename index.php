@@ -1,25 +1,25 @@
+<?php require_once "php/image.php";  ?>
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <?php require_once "php/image.php";  ?>
-  <title>	<?php if(!empty(title)) {echo title;} else{echo "лажа";} ?>	</title>    <!-- перевірив та застосував константу title -->
+  <title>	<?php if(!empty(GALLERY)) {echo GALLERY;} else{echo "лажа";} ?>	</title>    <!-- перевірив та застосував константу title -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
-
+<?php var_dump($imageArray); ?>
 <body>
   <div class="general">
     <div class="container"> 
         <ul class="imglist">
 
-         <?php foreach($new_arr as $sub_arr): ?>
+         <?php foreach($imageArray as $key => $value): ?>
              <li>
-                 <a href="<?php echo $sub_arr['url']; ?>" data-fancybox='mages'>
-                     <img src="<?php echo $sub_arr['url']; ?>" />
+                 <a href="<?php echo $value['urlImage']; ?>" data-fancybox='mages'>
+                     <img src="<?php echo $value['urlImage']; ?>" />
                  </a>
-                 <p><?php echo date('d F Y H:i:s', $sub_arr['timestamp']); ?></p>
+                 <p><?php echo $value['time']; ?></p>
              </li>
          <?php endforeach; ?>
         </ul>

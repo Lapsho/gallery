@@ -1,49 +1,63 @@
 <?php
 
-define('title', "Lapsho gallery");   
+define('GALLERY', "Lapsho gallery");
+define('JSON_DATA', "https://picsum.photos/list");
+define('INSTEAD_IMAGE', 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1');
 
-//the function checks the existence of the data, in the case of a true, decompresses them as an new associative array
-function path_exist($path, &$fetch_data){
-    if(!empty($path)) {
-        $fetch_data = json_decode($path,true);
-        return $fetch_data;
-    }else{
-        echo "perhaps the way does not lead anywhere (in fact, the variable is empty, that's for sure).";
-    }
-}
 
 //this function takes the value of the old array (which contains some of the information needed)
 // processes it and returns the new array to the information we need
-function instead_db($old_arr, &$new_arr){
-    foreach($old_arr as $image_data){
-        $origin_img_url = "https://picsum.photos/$image_data[width]/$image_data[height]/?image=$image_data[id]";
-        $new_sub_arr = getimagesize($origin_img_url);
+function insteadDB($soursURL)
+{
+    $imageDataArray = array();
+    if (!empty($soursURL)) {
+        $jsonArrayImage = array_slice(json_decode(file_get_contents($soursURL), true), 0, 9);
 
+        foreach ($jsonArrayImage as $key => $value) {
 
-        $new_sub_arr["url"] = $origin_img_url;
-        $new_sub_arr["timestamp"] = time();
-        $new_arr[] = $new_sub_arr;
+            $originImageURL = imageExist("https://picsum.photos/$value[width]/$value[height]/?image=$value[id]");
+
+            $imageData['urlImage'] = $originImageURL;
+            $imageData['author'] = $value['author'];
+            $imageData['time'] = imageDate();
+
+            $imageDataArray[] = $imageData;
+
+            //TODO doesn`t work - need understad why
+            /*
+            $iamgeDataArray[] = [
+                'urlImage' => $originImageURL,
+                'author' => $value['author'],
+                'time' => imageDate()
+            ];
+            */
+
+        }
+        buildSorter($imageDataArray);
+        return $imageDataArray;
     }
-    return $new_arr;
+}
+
+function imageExist($path){
+    if(!empty($path)) {
+        return $path;
+    }else{
+        return INSTEAD_IMAGE;
+    }
 }
 
 // comparison value of the key using the "natural order" algorithm
-function build_sorter($key) {
+function buildSorter($key) {
     return function ($a, $b) use ($key) {
         return strnatcmp($a[$key], $b[$key]);
     };
 }
 
+function imageDate()
+{
+    return date('d M Y H:i:s', time());
+}
 
-$json_file = file_get_contents("https://picsum.photos/list");
+$imageArray = insteadDB(JSON_DATA);
 
-
-path_exist($json_file, $json_array_image);
-
-$json_array_image = array_slice($json_array_image,0, 5);
-
-
-instead_db($json_array_image,$new_arr);
-
-usort($new_arr, build_sorter('timestamp'));
 ?>
