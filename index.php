@@ -13,7 +13,7 @@
     <div class="container"> 
         <ul class="imglist">
 
-         <?php foreach($imageArray as $key => $value): ?>
+         <?php foreach(insteadDB() as $key => $value): ?>
              <li>
                  <a href="<?php echo $value['urlImage']; ?>" data-fancybox='images'>
                      <img src="<?php echo $value['thumbnail']; ?>" />
@@ -22,6 +22,23 @@
              </li>
          <?php endforeach; ?>
         </ul>
+        <?php
+        /*текущая страница*/
+
+        $iCurr = (empty($_GET['page']) ? 1 : intval($_GET['page']));
+
+        /*всего страниц или конечная страница*/
+
+        $iLastPage = 45;
+
+        /*левый и правый лимиты*/
+
+        $iLeftLimit = 4;
+        $iRightLimit = 5;
+
+        /*вызов функции*/
+        makePager($iCurr, $iLastPage, $iLeftLimit, $iRightLimit) ;
+        ?>
     </div>
   </div>
 
