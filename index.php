@@ -10,7 +10,8 @@
 
 <body>
   <div class="general">
-    <div class="container"> 
+    <div class="container">
+        <input type="submit" value="upload image" onclick=" location.href='http://192.168.56.101/pages/form.php' ">
         <ul class="imglist">
 
          <?php foreach(insteadDB() as $key => $value): ?>
@@ -22,23 +23,6 @@
              </li>
          <?php endforeach; ?>
         </ul>
-        <?php
-        /*текущая страница*/
-
-        $iCurr = (empty($_GET['page']) ? 1 : intval($_GET['page']));
-
-        /*всего страниц или конечная страница*/
-
-        $iLastPage = 45;
-
-        /*левый и правый лимиты*/
-
-        $iLeftLimit = 4;
-        $iRightLimit = 5;
-
-        /*вызов функции*/
-        makePager($iCurr, $iLastPage, $iLeftLimit, $iRightLimit) ;
-        ?>
     </div>
   </div>
 

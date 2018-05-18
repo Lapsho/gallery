@@ -7,11 +7,12 @@ define('INSTEAD_IMAGE', 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1');
 
 //this function takes the sours url (which contains information about the image in remote resourse)
 // processes it and returns the new array of information in format we need (+ create thumbnail)
-function insteadDB($soursURL)
+function insteadDB()
 {
-    $imageDataArray = array();
-    if (!empty($soursURL)) {
-        $jsonArrayImage = array_slice(json_decode(file_get_contents($soursURL), true), 0, 9);
+//    $imageDataArray = array();
+
+    if (!empty(JSON_DATA)) {
+        $jsonArrayImage = array_slice(json_decode(file_get_contents(JSON_DATA), true), 0, 9);
 
         foreach ($jsonArrayImage as $key => $value) {
 
@@ -22,19 +23,20 @@ function insteadDB($soursURL)
             $imageData['urlImage'] = $originImageURL;
             $imageData['author'] = $value['author'];
             $imageData['time'] = imageDate();
-            $imageData['thumbnail'] = generateThumbnail($originImageURL, $width, $height);
+       //     $imageData['thumbnail'] = generateThumbnail($originImageURL, $width, $height);
+            $imageData['thumbnail'] = INSTEAD_IMAGE;
 
 
             $imageDataArray[] = $imageData;
 
             //TODO doesn`t work - need understad why
-            /*
-            $iamgeDataArray[] = [
-                'urlImage' => $originImageURL,
-                'author' => $value['author'],
-                'time' => imageDate()
-            ];
-            */
+//
+//            $iamgeDataArray[] = [
+//                'urlImage' => $originImageURL,
+//                'author' => $value['author'],
+//                'time' => imageDate(),
+//                'thumbnail' => generateThumbnail($originImageURL, $width, $height)
+//            ];
 
         }
         buildSorter($imageDataArray);
@@ -42,6 +44,11 @@ function insteadDB($soursURL)
     }
 }
 
+/**
+ * @param $path
+ * @return string
+ */
+//
 function imageExist($path){
     if(!empty($path)) {
         return $path;
@@ -122,6 +129,54 @@ function getOriginalSize($imagePath)
 
 
 
-$imageArray = insteadDB(JSON_DATA);
+///////////////////////////////////////////////
+/**Validate field values
+ * @param $data
+ * @return array|bool
+ */
+function valid($data){
+    $errors[] = array();
+
+    $author =  test_input($data['authorname']);
+    $description = test_input($data['description']);
+
+    if(empty($author)){
+        $errors[] = "You did not enter author field";
+    }
+
+    if(mb_strlen($author,'UTF-8') > 40){
+        $errors[] = "The author's field is too long (max 40)";
+    }
+
+    if(empty($description)){
+        $errors[] = "You did not enter description field";
+    }
+
+    if(mb_strlen($description,'UTF-8') > 250){
+        $errors[] = "The author's field is too long (max 250)";
+    }
+
+    if (!in_array(getimagesize($_FILES['sendImage']['tmp_name'])['mime'], ['image/jpeg', 'image/png', 'image/gif'])) {
+        $errors[] = 'You did not select a file or it`s not JPEG, PNG or GIF';
+    }
+
+    if(empty($errors)){
+        return true;
+    }else{
+        return $errors;
+    }
+}
+
+/**cuts and shields from html code
+ * @param $data
+ * @return string
+ */
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
 
 ?>
