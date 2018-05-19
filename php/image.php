@@ -39,9 +39,10 @@ function insteadDB()
 //            ];
 
         }
-        buildSorter($imageDataArray);
-        return $imageDataArray;
+
     }
+    buildSorter($imageDataArray);
+    return $imageDataArray;
 }
 
 /**
@@ -137,28 +138,30 @@ function getOriginalSize($imagePath)
 function valid($data){
     $errors[] = array();
 
-    $author =  test_input($data['authorname']);
-    $description = test_input($data['description']);
 
-    if(empty($author)){
-        $errors[] = "You did not enter author field";
-    }
+        $author = test_input($data['authorname']);
+        $description = test_input($data['description']);
 
-    if(mb_strlen($author,'UTF-8') > 40){
-        $errors[] = "The author's field is too long (max 40)";
-    }
 
-    if(empty($description)){
-        $errors[] = "You did not enter description field";
-    }
+        if (empty($author)) {
+            $errors[] = "You did not enter author field";
+        }
 
-    if(mb_strlen($description,'UTF-8') > 250){
-        $errors[] = "The author's field is too long (max 250)";
-    }
+        if (mb_strlen($author, 'UTF-8') > 40) {
+            $errors[] = "The author's field is too long (max 40)";
+        }
 
-    if (!in_array(getimagesize($_FILES['sendImage']['tmp_name'])['mime'], ['image/jpeg', 'image/png', 'image/gif'])) {
-        $errors[] = 'You did not select a file or it`s not JPEG, PNG or GIF';
-    }
+        if (empty($description)) {
+            $errors[] = "You did not enter description field";
+        }
+
+        if (mb_strlen($description, 'UTF-8') > 250) {
+            $errors[] = "The author's field is too long (max 250)";
+        }
+
+        if (isset($_FILES['sendImage']) && (!in_array(getimagesize($_FILES['sendImage']['tmp_name'])['mime'], ['image/jpeg', 'image/png', 'image/gif']))) {
+            $errors[] = 'You did not select a file or it`s not JPEG, PNG or GIF';
+        }
 
     if(empty($errors)){
         return true;

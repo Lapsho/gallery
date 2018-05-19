@@ -1,4 +1,4 @@
-<?php require_once "../php/image.php"?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +13,8 @@
     Select image: <input type="file" name='sendImage' /><br><br>
     <input type="submit" value="upload">
 </form>
+
 <?php
-
-
 if (($valid = valid($_REQUEST)) === true) {
     echo "ok";
 } else {
