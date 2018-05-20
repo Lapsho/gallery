@@ -1,15 +1,10 @@
 <?php
 
-define('GALLERY', "Lapsho gallery");
-define('JSON_DATA', "https://picsum.photos/list");
-define('INSTEAD_IMAGE', 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1');
-
 
 //this function takes the sours url (which contains information about the image in remote resourse)
 // processes it and returns the new array of information in format we need (+ create thumbnail)
 function insteadDB()
 {
-//    $imageDataArray = array();
 
     if (!empty(JSON_DATA)) {
         $jsonArrayImage = array_slice(json_decode(file_get_contents(JSON_DATA), true), 0, 9);
@@ -23,11 +18,13 @@ function insteadDB()
             $imageData['urlImage'] = $originImageURL;
             $imageData['author'] = $value['author'];
             $imageData['time'] = imageDate();
-       //     $imageData['thumbnail'] = generateThumbnail($originImageURL, $width, $height);
+            $imageData['width'] = $width;
+            $imageData['height'] = $height;
+//            $imageData['thumbnail'] = generateThumbnail($originImageURL, $width, $height);
             $imageData['thumbnail'] = INSTEAD_IMAGE;
 
-
             $imageDataArray[] = $imageData;
+
 
             //TODO doesn`t work - need understad why
 //
@@ -41,7 +38,7 @@ function insteadDB()
         }
 
     }
-    buildSorter($imageDataArray);
+    sortImages($imageDataArray);
     return $imageDataArray;
 }
 
@@ -61,9 +58,9 @@ function imageExist($path){
 
 //TODO fix this
 // comparison value of the key using the "natural order" algorithm
-function buildSorter($key) {
-    return function ($a, $b) use ($key) {
-        return strnatcmp($a[$key], $b[$key]);
+function sortImages($time) {
+    return function ($image1, $image2) use ($time) {
+        return strnatcmp($image1[$time], $image2[$time]);
     };
 }
 
@@ -127,59 +124,5 @@ function getOriginalSize($imagePath)
 {
     return getimagesize($imagePath);
 }
-
-
-
-///////////////////////////////////////////////
-/**Validate field values
- * @param $data
- * @return array|bool
- */
-function valid($data){
-    $errors[] = array();
-
-
-        $author = test_input($data['authorname']);
-        $description = test_input($data['description']);
-
-
-        if (empty($author)) {
-            $errors[] = "You did not enter author field";
-        }
-
-        if (mb_strlen($author, 'UTF-8') > 40) {
-            $errors[] = "The author's field is too long (max 40)";
-        }
-
-        if (empty($description)) {
-            $errors[] = "You did not enter description field";
-        }
-
-        if (mb_strlen($description, 'UTF-8') > 250) {
-            $errors[] = "The author's field is too long (max 250)";
-        }
-
-        if (isset($_FILES['sendImage']) && (!in_array(getimagesize($_FILES['sendImage']['tmp_name'])['mime'], ['image/jpeg', 'image/png', 'image/gif']))) {
-            $errors[] = 'You did not select a file or it`s not JPEG, PNG or GIF';
-        }
-
-    if(empty($errors)){
-        return true;
-    }else{
-        return $errors;
-    }
-}
-
-/**cuts and shields from html code
- * @param $data
- * @return string
- */
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
 
 ?>

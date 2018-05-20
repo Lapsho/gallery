@@ -1,5 +1,5 @@
 <?php
-require_once "php/image.php";
+require_once "php/pool.php";
 
 switch ($_GET['page']??'') {
     case '':
