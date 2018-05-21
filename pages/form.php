@@ -1,28 +1,39 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-<h3>Upload your image</h3>
-<form method="POST" enctype="multipart/form-data">
-    Name image: <input type="text" name='authorname' /><br><br>
-    Description: <input type="text" name='description' /><br><br>
-    Select image: <input type="file" name='sendImage' /><br><br>
-    <input type="submit" value="upload">
-</form>
-
-<?php
-if (($valid = valid($_REQUEST)) === true) {
-    echo "ok";
-} else {
-    foreach($valid as $error){
-        echo $error . "</br>";
-    };
-}
-
-?>
-</body>
+    <head>
+        <title>Form</title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    <body>
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <h1 class="h1 text-center">Upload New Image</h1>
+                <?php if ($errors = getErrors()): ?>
+                <div class="alert alert-danger">
+                    <strong>Error:&nbsp;</strong><?php echo $errors ?>
+                </div>
+                <?php endif; ?>
+                <form action="/submit" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="authorname">Author Name</label>
+                        <input type="text" class="form-control" id="authorname" name="authorname" value="<?php echo getFieldValue('authorname') ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3"><?php echo getFieldValue('description') ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Select Image</label>
+                        <input type="file" class="form-control-file" id="image" name="image">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <a class="btn btn-light" href="">Back to Gallery</a>
+                            <button type="submit" class="btn btn-dark">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
