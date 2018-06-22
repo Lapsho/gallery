@@ -1,7 +1,8 @@
 <?php
 
 $id = $_REQUEST['id'];
+$user = new contentManaging();
 
-deleteImage($id);
+$user->deleteImage($id);
 
 header('Location: /');

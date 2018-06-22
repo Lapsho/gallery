@@ -10,12 +10,13 @@
 
 class Commons extends connectDB{
 
-    /** defined image placeholder  */
-    const IMAGE_PLACEHOLDER = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
-    /** defined constant with path to images stored folder */
-    const IMAGE_THUMBNAIL_URL = 'pub/media/thumbnails/';
+    /** name site */
+    const PAGE_TITLE = 'Lapsho Gallery';
+    /** image qty on page */
+    const IMAGE_COUNT = 9;
 
-    //uploadFile(), generateThumbnail(),
+
+    // apply in contentManag and generateThumbnail
     /** Check directory existing and create it if not
      *
      * @param $path
@@ -31,7 +32,7 @@ class Commons extends connectDB{
 
 
 
-// isAllowedPage deleteImage  напряму
+// isAllowedPage deleteImage  напряму   (contentManag
 
     /** Check if user is logged in
      *
@@ -44,6 +45,21 @@ class Commons extends connectDB{
         }
 
         return false;
+    }
+
+
+    /** Get filed value from session
+     *
+     * @param $field
+     * @return string
+     */
+    public function getFieldValue($field)
+    {
+        if (isset($_SESSION['fields'][$field])) {
+            return $_SESSION['fields'][$field];
+        }
+
+        return '';
     }
 }
 

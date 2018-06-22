@@ -1,9 +1,9 @@
 <?php
-
+$user = new contentManaging();
 $request = $_REQUEST;
 
-if (($valid = validateUpload($request)) === true) {
-    if (save()) {
+if (($valid = $user->validateUpload($request)) === true) {
+    if ($user->save()) {
         header('Location: /');
     } else {
         header('Location: /form?' . http_build_query(array('errors[]' => 'Something went wrong')));

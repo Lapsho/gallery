@@ -1,3 +1,3 @@
 <?php
-
-logOut();
+$user = new User();
+$user->logOut();

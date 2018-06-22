@@ -6,7 +6,8 @@
  * Time: 21:06
  */
 
-class displayErrors extends Commons{
+class collectErrors extends Commons{
+
     /** Get errors from request
      *
      * @return bool|string
@@ -43,7 +44,53 @@ class displayErrors extends Commons{
 
         return false;
     }
+    /** Write error to log file
+     *
+     * @param $errorNo
+     * @param $errorMessage
+     * @param $errorFile
+     * @param $errorLine
+     */
+    public function errorHandler($errorNo, $errorMessage, $errorFile, $errorLine)
+    {
+        $error = 'Error level: ' . $errorNo . ' Text: ' . $errorMessage . ' in file: ' . $errorFile . ' on line: ' . $errorLine . "\n";
+        error_log($error, 3, $_SERVER['DOCUMENT_ROOT'] . self::ERROR_LOG);
+    }
 
+    /** Write fatal error to log file and show error page
+     */
+    public function shutDown()
+    {
+        if ($error = error_get_last()) {
+            error_log($error['message'], 3, $_SERVER['DOCUMENT_ROOT'] . self::ERROR_LOG);
+            require($_SERVER['DOCUMENT_ROOT'] . 'view/error.php');
+        }
+    }
+
+    /** Write exception to log and show error page
+     *
+     * @param $e
+     */
+    public function exceptionHandler($e)
+    {
+        error_log($e->$this->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . self::ERROR_LOG);
+        require($_SERVER['DOCUMENT_ROOT'] . 'view/error.php');
+    }
+
+    /** Check if page is allowed for non logged in users
+     *
+     * @param $page
+     * @return mixed
+     */
+    public function isAllowedPage($page)
+    {
+        if ((!$this->isLoggedIn() && $page == 'form') || ($this->isLoggedIn() && ($page == 'login' || $page == 'register'))) {
+            header('Location: /');
+            exit();
+        }
+
+        return $page;
+    }
 }
 
 

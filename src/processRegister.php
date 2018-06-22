@@ -1,8 +1,8 @@
 <?php
-
+$user = new User();
 $post = $_POST;
 
-if (validateRegistration($post) && createUser($post['login'], $post['pass'], $post['repass'])) {
+if ($user->validateRegistration($post) && $user->createUser($post['login'], $post['pass'], $post['repass'])) {
     header('Location: /');
 } else {
     header('Location: /register');
