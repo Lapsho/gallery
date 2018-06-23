@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 error_reporting(E_ALL | E_STRICT);
 session_start();
@@ -8,3 +9,4 @@ spl_autoload_register(function ($classname) {
 
 $app = new App();
 $app->controller();
+
