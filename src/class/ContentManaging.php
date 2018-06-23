@@ -8,7 +8,7 @@
 
 
 // add, remove image
-class contentManaging extends Commons
+class ContentManaging extends Commons
 {
     /** defined constant with path to images stored folder */
     const IMAGE_RESOURCE_URL = 'pub/media/images/';

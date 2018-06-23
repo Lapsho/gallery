@@ -8,7 +8,7 @@
 
 
 
-class Commons extends connectDB{
+class Commons extends ConnectDB{
 
     /** name site */
     const PAGE_TITLE = 'Lapsho Gallery';

@@ -7,7 +7,7 @@
  */
 
 // login, logout, authorize user
-class User extends connectDB
+class User extends ConnectDB
 {
     /** Authorize user
      *

@@ -1,5 +1,4 @@
 .idea/
-/var/users.txt
 .git
 var/error.log
 pub/media

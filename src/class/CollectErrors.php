@@ -6,7 +6,7 @@
  * Time: 21:06
  */
 
-class collectErrors extends Commons{
+class CollectErrors extends Commons{
 
     /** Get errors from request
      *

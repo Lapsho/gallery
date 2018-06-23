@@ -7,13 +7,13 @@
  */
 
 
-class renderPagination extends Commons {
+class Pagination extends Commons {
 
     /** Generate pagination HTML
      *
      * @return string
      */
-    public function Pagination()
+    public function renderPagination()
     {
         $paginationHtml = '';
         if ($this->getPageCount() > 1) {

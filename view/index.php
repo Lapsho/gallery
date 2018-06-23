@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php $collectErrors = new collectErrors(); ?>
     <title><?php echo $collectErrors::PAGE_TITLE ?></title>
     <link rel="stylesheet" href="pub/css/bootstrap.css">
     <link rel="stylesheet" href="pub/css/main.css">
@@ -36,7 +35,6 @@
             </div>
         <?php endif; ?>
         <div class="row">
-            <?php $getCollection = new Collection(); ?>
             <?php if (!empty($images = $getCollection->getCollection())): ?>
                 <?php foreach ($images as $image): ?>
                     <div class="col-md-4">
@@ -70,8 +68,7 @@
         <div class="d-flex p-2">
             <nav>
                 <ul class="pagination justify-content-center">
-                    <?php $pagination = new renderPagination(); ?>
-                    <?php echo $pagination->Pagination() ?>
+                    <?php echo $pagination->renderPagination() ?>
                 </ul>
             </nav>
         </div>

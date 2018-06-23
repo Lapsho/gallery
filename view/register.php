@@ -9,7 +9,6 @@
 <div class="album py-5 bg-light">
     <div class="container">
         <h1 class="h1 text-center">Create an account</h1>
-        <?php $collectErrors = new collectErrors(); ?>
         <?php if ($errors = $collectErrors->getErrors()): ?>
             <div class="alert alert-danger">
                 <strong>Error:&nbsp;</strong><?php echo $errors ?>

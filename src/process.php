@@ -1,5 +1,5 @@
 <?php
-$user = new contentManaging();
+
 $request = $_REQUEST;
 
 if (($valid = $user->validateUpload($request)) === true) {

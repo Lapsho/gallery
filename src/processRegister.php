@@ -1,5 +1,5 @@
 <?php
-$user = new User();
+
 $post = $_POST;
 
 if ($user->validateRegistration($post) && $user->createUser($post['login'], $post['pass'], $post['repass'])) {
@@ -7,4 +7,3 @@ if ($user->validateRegistration($post) && $user->createUser($post['login'], $pos
 } else {
     header('Location: /register');
 }
-

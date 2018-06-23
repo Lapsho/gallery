@@ -6,7 +6,7 @@
  * Time: 21:05
  */
 
-class connectDB{
+class ConnectDB{
 
     const ERROR_LOG = 'var/error.log';
     /** project config file */
