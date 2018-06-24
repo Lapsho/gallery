@@ -14,7 +14,8 @@ class Commons extends ConnectDB{
     const PAGE_TITLE = 'Lapsho Gallery';
     /** image qty on page */
     const IMAGE_COUNT = 9;
-
+    /** defined image placeholder  */
+    const IMAGE_PLACEHOLDER = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
 
     // apply in contentManag and generateThumbnail
     /** Check directory existing and create it if not

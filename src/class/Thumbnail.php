@@ -8,8 +8,6 @@
 
 class Thumbnail extends Commons
 {
-    /** defined image placeholder  */
-    const IMAGE_PLACEHOLDER = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
     /** defined constant with path to images stored folder */
     const IMAGE_THUMBNAIL_URL = 'pub/media/thumbnails/';
 

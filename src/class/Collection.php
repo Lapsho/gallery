@@ -27,6 +27,8 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $images = [];
         if ($result->rowCount() > 0) {
             foreach ($result->fetchAll() as $value) {
+                $value['image_path'] = $this->imageExists($value['image_path']);
+                $value['thumbnail_path'] = $this->imageExists($value['thumbnail_path']);
                 $images[] = $value;
             }
         } else {
@@ -54,4 +56,14 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
             });
         }
     }
+
+    public function imageExists($imagePath)
+{
+    if (file_exists($imagePath)) {
+        return $imagePath;
+    }else{
+        $imagePath = self::IMAGE_PLACEHOLDER;
+        return $imagePath;
+    }
+}
 }

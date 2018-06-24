@@ -110,9 +110,9 @@ VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, CURRENT_T
             $database = $this->connect();
             $image = $this->request($database, "SELECT image_path, thumbnail_path FROM images WHERE id = :id", [':id' => $id]);
             $this->request($database, "DELETE FROM images WHERE id = :id", [':id' => $id]);
-            $all = $image->fetchAll();
-            unlink($all[0][0]);     //delete image
-            unlink($all[0][1]);     //delete thumbnail
+            $patch = $image->fetchAll();
+            unlink($patch[0][0]);     //delete image
+            unlink($patch[0][1]);     //delete thumbnail
             $_SESSION['messages'] = ['You have deleted image'];
             return true;
         } else {
