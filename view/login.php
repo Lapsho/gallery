@@ -3,10 +3,10 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="pub/css/bootstrap.css">
-    <link rel="stylesheet" href="pub/css/main.css">
+    <link rel="stylesheet" href="pub/css/style.css">
 </head>
 <body>
-<div class="album py-5 bg-light">
+<div class="general">
     <div class="container">
         <h1 class="h1 text-center">Login as user</h1>
         <?php  ?>
@@ -30,8 +30,8 @@
             </div>
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <a class="btn btn-light" href="/">Back to Gallery</a>
-                    <button type="submit" class="btn btn-dark">Submit</button>
+                    <a class="btn btn-dark" href="/">Back to Gallery</a>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
         </form>
