@@ -1,36 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Error</title>
-    <link rel="stylesheet" href="<?php echo $_SERVER['REMOTE_HOST'] ?>pub/css/bootstrap.css">
+    <!-- Simple HttpErrorPages | MIT License | https://github.com/AndiDittrich/HttpErrorPages -->
+    <meta charset="utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=edge" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>We've got some trouble | 500 - Webservice currently unavailable</title>
+    <link rel="stylesheet" href="pub/css/ErrorPage.css">
 </head>
 <body>
-<div class="container">
-    <div class="jumbotron">
-        <p class="lead">The web server is returning an internal error for <em><span id="display-domain"></span></em>.
-        </p>
-        <a href="javascript:document.location.reload(true);" class="btn btn-default btn-lg text-center"><span
-                    class="green">Try This Page Again</span></a>
-    </div>
-</div>
-<div class="container">
-    <div class="body-content">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>What happened?</h2>
-                <p class="lead">A 500 error status implies there is a problem with the web server's software causing it
-                    to malfunction.</p>
-            </div>
-            <div class="col-md-6">
-                <h2>What can I do?</h2>
-                <p class="lead">If you're a site visitor</p>
-                <p> Nothing you can do at the moment. If you need immediate assistance, please send us an email instead.
-                    We apologize for any inconvenience.</p>
-                <p class="lead">If you're the site owner</p>
-                <p>This error can only be fixed by server admins, please contact your website provider.</p>
-            </div>
-        </div>
-    </div>
-</div>
+    <div class="cover"><h1>Webservice currently unavailable <small>Error 500</small></h1><p class="lead">An unexpected condition was encountered.<br />Our service team has been dispatched to bring it back online.</p></div>
+    
 </body>
 </html>

@@ -44,7 +44,7 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
     /** Sort array of images
      * @param $images
      */
-    protected function sortImages(&$images)
+    public function sortImages(&$images)
     {
         if (!empty($images)) {
             //sorting part
