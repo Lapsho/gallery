@@ -19,9 +19,11 @@ class User extends ConnectDB
     {
         $database = $this->connect();
         $pass = crypt($postPass, $postUser);
-        $result = $this->request($database, 'SELECT id FROM users WHERE login = :login AND password = :pass', [':login' => $postUser, ':pass' => $pass]);
+        $result = $this->request($database, 'SELECT id, access FROM users WHERE login = :login AND password = :pass', [':login' => $postUser, ':pass' => $pass]);
         if ($result->rowCount() == 1) {
-            $_SESSION['auth'] = $result->fetchColumn(0);
+            $respond = $result->fetchAll();
+            $_SESSION['auth'] = $respond[0][0];
+            $_SESSION['access'] = $respond[0][1];
             $_SESSION['messages'] = ['You have logged in successfuly'];
             unset($_SESSION['fields']);
             return true;
@@ -120,7 +122,7 @@ class User extends ConnectDB
      */
     public function logOut()
     {
-        unset($_SESSION['auth']);
+        unset($_SESSION['auth'], $_SESSION['access']);
         $_SESSION['messages'] = ['You have logged out'];
         header('Location: /');
     }

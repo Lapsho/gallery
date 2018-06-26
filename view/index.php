@@ -33,6 +33,7 @@
                 <button type="submit" class="btn btn-info" name="display" value="all">Display all images</button>
                 <button type="submit" class="btn btn-info" name="display" value="own">Display own images</button>
             </form>
+        <?php else: echo "</br>"; ?>
         <?php endif; ?>
     </div>
     <?php if ($messages = $collectErrors->getMessages()): ?>
@@ -54,7 +55,7 @@
                             Owner: <i><?php echo $image['login'] ?></i></br>
                             Created at: <i><?php echo $image['created_at'] ?></i></br>
                         </p>
-                        <?php if ($getCollection->isLoggedIn()): ?>
+                        <?php if (($_SESSION['auth'] === $image['user_id']) or ($_SESSION['access'] === 'admin')): ?>
                             <button type="button" class="btn btn-warning btn-block"
                                     onclick="if (confirm('Are you sure?')) {location.href = '/removeImage?id=<?php echo $image['id'] ?>';}">
                                 Delete

@@ -32,7 +32,7 @@ class Collection extends Commons
         $database = $this->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
-        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, created_at, login FROM images
+        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, created_at, login, user_id FROM images
 LEFT JOIN users on images.user_id = users.id
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $result = $this->request($database, $sql);
@@ -60,7 +60,7 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $database = $this->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
-        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, created_at, login FROM images
+        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, created_at, login, user_id FROM images
 LEFT JOIN users on images.user_id = users.id WHERE images.user_id = " . $_SESSION['auth'] . "
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $result = $this->request($database, $sql);
