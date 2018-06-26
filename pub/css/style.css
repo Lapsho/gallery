@@ -13,8 +13,13 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 2%;
-	background-color: rgba(224, 255, 255, 0.7);
-	border-radius: 1%;
+}
+
+.head {
+	width: 100%;
+	margin-bottom: 2%;
+	background-color: rgba(184, 239, 255, 0.8);
+	border-radius: 5px;
 }
 
 .image-center {
@@ -56,7 +61,7 @@ body {
 	list-style:none;
 	float: left; 
 	width: 16%;
-	margin: 2% 2% 40px 2%;
+	margin: 2% 2% 10px 2%;
 	color: #5d5f5d;
 }
  

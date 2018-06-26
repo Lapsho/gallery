@@ -11,31 +11,34 @@
 
 <body>
 <div class="general">
-    <ul class="nav justify-content-end">
+    <div class="head">
+        <ul class="nav justify-content-end">
+            <?php if ($collectErrors->isLoggedIn()): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Registration</a>
+                </li>
+            <?php endif; ?>
+        </ul>
+        <h1 class="h1 text-center"><?php echo $getCollection::PAGE_TITLE ?></h1>
         <?php if ($collectErrors->isLoggedIn()): ?>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Log out</a>
-            </li>
-        <?php else: ?>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/register">Registration</a>
-            </li>
+            <button type="button" class="btn btn-info" onclick="location.href='form'">Upload image</button>
+            <form action="switchCollections" method="get" class="btn-group">
+                <button type="submit" class="btn btn-info" name="display" value="all">Display all images</button>
+                <button type="submit" class="btn btn-info" name="display" value="own">Display own images</button>
+            </form>
         <?php endif; ?>
-    </ul>
+    </div>
     <?php if ($messages = $collectErrors->getMessages()): ?>
         <div class="alert alert-warning">
             <?php echo $messages ?>
         </div>
-    <?php endif; ?>
-    <?php if ($collectErrors->isLoggedIn()): ?>
-        <button type="button" class="btn btn-info" onclick="location.href='form'">Upload image</button>
-        <form action="switchCollections" method="get" class="btn-group">
-                <button type="submit" class="btn btn-info" name="display" value="all">Display all images</button>
-                <button type="submit" class="btn btn-info" name="display" value="own">Display own images</button>
-        </form>
     <?php endif; ?>
     <div class="contain">
         <?php if (!empty($images = $getCollection->switchCollections())): ?>
@@ -46,10 +49,10 @@
                             <img src="<?php echo $image['thumbnail_path']; ?>" />
                         </a>
                         <p>
-                            Author: <?php echo $image['author_name'] ?>,</br>
-                            Description: <?php echo $image['description'] ?>,</br>
-                            Owner: <?php echo $image['login'] ?></br>
-                            Created at: <?php echo $image['created_at'] ?></br>
+                            Author: <i><?php echo $image['author_name'] ?>,</i></br>
+                            Description: <i><?php echo $image['description'] ?>,</i></br>
+                            Owner: <i><?php echo $image['login'] ?></i></br>
+                            Created at: <i><?php echo $image['created_at'] ?></i></br>
                         </p>
                         <?php if ($getCollection->isLoggedIn()): ?>
                             <button type="button" class="btn btn-warning btn-block"
