@@ -53,6 +53,9 @@ class App
                 $user = new ContentManaging();
                 require('src/removeImage.php');
                 break;
+            case 'switchCollections':
+                require ('src/switchCollections.php');
+                break;
             default:
                 $collectErrors = new CollectErrors();
                 $getCollection = new Collection();

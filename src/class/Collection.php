@@ -8,6 +8,20 @@
 
 class Collection extends Commons
 {
+    /** Causes the required method to sort the gallery
+     *
+     */
+    public function switchCollections()
+    {
+        switch ($_SESSION['switch_collections']){
+            case 'own':
+                return $this->getOwnCollection();
+                break;
+            default:
+                return $this->getCollection();
+                break;
+        }
+    }
 
     /** Return array with images
      *
@@ -21,8 +35,6 @@ class Collection extends Commons
         $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, created_at, login FROM images
 LEFT JOIN users on images.user_id = users.id
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
-
-
         $result = $this->request($database, $sql);
         $images = [];
         if ($result->rowCount() > 0) {
@@ -40,6 +52,33 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         return $images;
     }
 
+    /** Return array only with images user that authorized
+     * @return array
+     */
+    public function getOwnCollection()
+    {
+        $database = $this->connect();
+        $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
+        $offset = $offset * self::IMAGE_COUNT;
+        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, created_at, login FROM images
+LEFT JOIN users on images.user_id = users.id WHERE images.user_id = " . $_SESSION['auth'] . "
+LIMIT " . $offset . ", " . self::IMAGE_COUNT;
+        $result = $this->request($database, $sql);
+        $images = [];
+        if ($result->rowCount() > 0) {
+            foreach ($result->fetchAll() as $value) {
+                $value['image_path'] = $this->imageExists($value['image_path']);
+                $value['thumbnail_path'] = $this->imageExists($value['thumbnail_path']);
+                $images[] = $value;
+            }
+        } else {
+            // set empty array
+            $images = [];
+        }
+        $this->sortImages($images);
+
+        return $images;
+    }
 
     /** Sort array of images
      * @param $images

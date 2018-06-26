@@ -32,9 +32,13 @@
     <?php endif; ?>
     <?php if ($collectErrors->isLoggedIn()): ?>
         <button type="button" class="btn btn-info" onclick="location.href='form'">Upload image</button>
+        <form action="switchCollections" method="get" class="btn-group">
+                <button type="submit" class="btn btn-info" name="display" value="all">Display all images</button>
+                <button type="submit" class="btn btn-info" name="display" value="own">Display own images</button>
+        </form>
     <?php endif; ?>
     <div class="contain">
-        <?php if (!empty($images = $getCollection->getCollection())): ?>
+        <?php if (!empty($images = $getCollection->switchCollections())): ?>
             <?php foreach ($images as $image): ?>
                 <div class="image-container">
                     <div class="img-thumbnail">
