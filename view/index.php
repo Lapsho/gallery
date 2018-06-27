@@ -28,11 +28,13 @@
         </ul>
         <h1 class="h1 text-center"><?php echo $getCollection::PAGE_TITLE ?></h1>
         <?php if ($collectErrors->isLoggedIn()): ?>
-            <button type="button" class="btn btn-info" onclick="location.href='form'">Upload image</button>
-            <form action="switchCollections" method="get" class="btn-group">
+        <div class="btn-head-group">
+            <button type="button" class="btn btn-info btn-head" onclick="location.href='form'">Upload image</button>
+            <form action="switchCollections" method="get" class="btn-group btn-head">
                 <button type="submit" class="btn btn-info" name="display" value="all">Display all images</button>
                 <button type="submit" class="btn btn-info" name="display" value="own">Display own images</button>
             </form>
+        </div>
         <?php else: echo "</br>"; ?>
         <?php endif; ?>
     </div>
@@ -72,7 +74,7 @@
             </div>
         <?php endif; ?>
     </div>
-    <div>
+    <div class="position-bottom">
         <nav>
             <ul class="pagination justify-content-center">
                 <?php echo $pagination->renderPagination() ?>
