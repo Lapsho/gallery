@@ -6,14 +6,22 @@
  * Time: 23:43
  */
 
+/** Contains different methods for fetching images data from DB
+ *
+ * Class Collection
+ */
 class Collection extends Commons
 {
+    /** Contains a path to an image that appears when the collection is empty  */
+    const NO_IMAGES = '/frontend/program_images/BackToTheFuture.jpg';
+
     /** Causes the required method to sort the gallery
      *
+     * @return array|mixed
      */
     public function switchCollections()
     {
-        switch ($_SESSION['switch_collections']){
+        switch ($_SESSION['switch_collections']) {
             case 'own':
                 return $this->getOwnCollection();
                 break;
@@ -22,6 +30,7 @@ class Collection extends Commons
                 break;
         }
     }
+
 
     /** Return array with images
      *
@@ -52,7 +61,9 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         return $images;
     }
 
+
     /** Return array only with images user that authorized
+     *
      * @return array
      */
     public function getOwnCollection()
@@ -80,7 +91,9 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         return $images;
     }
 
+
     /** Sort array of images
+     *
      * @param $images
      */
     public function sortImages(&$images)
@@ -96,13 +109,19 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         }
     }
 
+
+    /** checks the existence of the file
+     *
+     * @param $imagePath
+     * @return string
+     */
     public function imageExists($imagePath)
-{
-    if (file_exists($imagePath)) {
-        return $imagePath;
-    }else{
-        $imagePath = self::IMAGE_PLACEHOLDER;
-        return $imagePath;
+    {
+        if (file_exists($imagePath)) {
+            return $imagePath;
+        } else {
+            $imagePath = self::IMAGE_PLACEHOLDER;
+            return $imagePath;
+        }
     }
-}
 }

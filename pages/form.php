@@ -2,8 +2,7 @@
 <html>
     <head>
         <title>Form</title>
-        <link rel="stylesheet" href="pub/css/bootstrap.css">
-        <link rel="stylesheet" href="pub/css/style.css">
+        <?php include Commons::CSS_PATH ?>
     </head>
     <body>
         <div class="general">

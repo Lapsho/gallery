@@ -7,9 +7,16 @@
  */
 
 
-
+/** Controller
+ *
+ * Class App
+ */
 class App
 {
+    /** Automated detection and registration of errors
+     *
+     * App constructor.
+     */
     public function __construct()
     {
         $errors = new CollectErrors();
@@ -18,52 +25,55 @@ class App
         register_shutdown_function(array($errors, 'shutDown'));
     }
 
-    public function controller(){
+
+    /** Controller
+     *
+     */
+    public function controller()
+    {
         $errors = new CollectErrors();
-        switch ($errors->isAllowedPage($_GET['page']??'')) {
+        switch ($errors->isAllowedPage($_GET['page'] ?? '')) {
             case 'form':
                 $collectErrors = new CollectErrors();
-                require('view/form.php');
+                require('pages/form.php');
                 break;
             case 'submit':
                 $user = new ContentManaging();
-                require('src/process.php');
+                require('backend/dandelion_gallery/helpers/process.php');
                 break;
             case 'login':
                 $collectErrors = new CollectErrors();
-                require('view/login.php');
+                require('pages/login.php');
                 break;
             case 'logout':
                 $user = new User();
-                require('src/logout.php');
+                require('backend/dandelion_gallery/helpers/logout.php');
                 break;
             case 'processLogin':
                 $user = new User();
-                require('src/processLogin.php');
+                require('backend/dandelion_gallery/helpers/processLogin.php');
                 break;
             case 'register':
                 $collectErrors = new CollectErrors();
-                require('view/register.php');
+                require('pages/register.php');
                 break;
             case 'processRegister':
                 $user = new User();
-                require('src/processRegister.php');
+                require('backend/dandelion_gallery/helpers/processRegister.php');
                 break;
             case 'removeImage':
                 $user = new ContentManaging();
-                require('src/removeImage.php');
+                require('backend/dandelion_gallery/helpers/removeImage.php');
                 break;
             case 'switchCollections':
-                require ('src/switchCollections.php');
+                require('backend/dandelion_gallery/helpers/switchCollections.php');
                 break;
             default:
                 $collectErrors = new CollectErrors();
                 $getCollection = new Collection();
                 $pagination = new Pagination();
-                require('view/index.php');
+                require('pages/index.php');
         }
     }
-
-
 
 }

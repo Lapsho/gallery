@@ -7,13 +7,17 @@
  */
 
 
-// add, remove image
+/** Help save and remove image width validation
+ *
+ * Class ContentManaging
+ */
 class ContentManaging extends Commons
 {
     /** defined constant with path to images stored folder */
-    const IMAGE_RESOURCE_URL = 'pub/media/images/';
+    const IMAGE_RESOURCE_URL = 'content/media/images/';
 
     /** save everything including file, form data and generate thumbnail
+     *
      * @return bool
      * @throws Exception
      */
@@ -44,6 +48,7 @@ VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, CURRENT_T
 
         return false;
     }
+
 
     /** Move file into destination directory, check directory existing
      *
@@ -96,7 +101,6 @@ VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, CURRENT_T
             return true;
         }
     }
-
 
 
     /** Remove image

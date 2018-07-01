@@ -64,7 +64,6 @@ class User extends ConnectDB
     }
 
 
-
     /** add user info into file and auth user
      *
      * @param $login

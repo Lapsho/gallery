@@ -6,8 +6,13 @@
  * Time: 21:05
  */
 
-class ConnectDB{
-
+/** Contains a method for establishing a connection to a database and storing information in it
+ *
+ * Class ConnectDB
+ */
+class ConnectDB
+{
+    /** way to error file */
     const ERROR_LOG = 'var/error.log';
     /** project config file */
     const CONFIG_FILE = 'var/config.ini';
@@ -34,8 +39,6 @@ class ConnectDB{
             exit;
         }
     }
-
-
 
     /** Process database queries
      *

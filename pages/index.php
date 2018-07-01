@@ -2,11 +2,8 @@
 <html>
 <head>
     <title><?php echo $getCollection::PAGE_TITLE ?></title>
-    <link rel="stylesheet" href="pub/css/bootstrap.css">
-    <link rel="stylesheet" href="pub/css/style.css">
-    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
+    <?php include Commons::CSS_PATH ?>
+    <?php include Commons::FANCYBOX_PATH ?>
 </head>
 
 <body>
@@ -26,7 +23,7 @@
                 </li>
             <?php endif; ?>
         </ul>
-        <h1 class="h1 text-center"><?php echo $getCollection::PAGE_TITLE ?></h1>
+        <h1 class="h1 text-center font-title"><?php echo $getCollection::PAGE_TITLE ?></h1>
         <?php if ($collectErrors->isLoggedIn()): ?>
         <div class="btn-head-group">
             <button type="button" class="btn btn-info btn-head" onclick="location.href='form'">Upload image</button>
@@ -59,7 +56,10 @@
                         </p>
                         <?php if (($_SESSION['auth'] === $image['user_id']) or ($_SESSION['access'] === 'admin')): ?>
                             <button type="button" class="btn btn-warning btn-block"
-                                    onclick="if (confirm('Are you sure?')) {location.href = '/removeImage?id=<?php echo $image['id'] ?>';}">
+                                    onclick="if (confirm('Are you sure?'))
+                                    {
+                                        location.href = '/removeImage?id=<?php echo $image['id'] ?>';
+                                    }">
                                 Delete
                             </button>
                         <?php endif; ?>
@@ -69,7 +69,7 @@
         <?php else: ?>
             </br>
             <div class="image-center">
-                <img src="pub/css/BackToTheFuture.jpg" />
+                <img src="<?php echo Collection::NO_IMAGES; ?>" />
                 <p><i>...no pictures also</i></p>
             </div>
         <?php endif; ?>

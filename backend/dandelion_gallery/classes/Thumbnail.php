@@ -6,10 +6,15 @@
  * Time: 23:32
  */
 
+/** Generate thumbnail for images
+ * Class Thumbnail
+ *
+ */
 class Thumbnail extends Commons
 {
     /** defined constant with path to images stored folder */
-    const IMAGE_THUMBNAIL_URL = 'pub/media/thumbnails/';
+    const IMAGE_THUMBNAIL_URL = 'content/media/thumbnails/';
+
 
     /** Generate image thumbnail
      *
@@ -110,6 +115,5 @@ class Thumbnail extends Commons
         }
 
         return false;
-
     }
 }

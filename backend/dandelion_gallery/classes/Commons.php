@@ -7,17 +7,25 @@
  */
 
 
-
-class Commons extends ConnectDB{
+/** Contain commons methods and constant for several classes
+ *
+ * Class Commons
+ */
+class Commons extends ConnectDB
+{
 
     /** name site */
-    const PAGE_TITLE = 'Lapsho Gallery';
+    const PAGE_TITLE = 'Dandelion Gallery';
     /** image qty on page */
     const IMAGE_COUNT = 9;
     /** defined image placeholder  */
-    const IMAGE_PLACEHOLDER = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
+    const IMAGE_PLACEHOLDER = '/frontend/program_images/placeholder.png';
+    /** contain href to all css files */
+    const CSS_PATH = 'backend/dandelion_gallery/helpers/css.php';
+    /** contain href to fancybox files */
+    const FANCYBOX_PATH = 'backend/dandelion_gallery/helpers/fancybox.php';
 
-    // apply in contentManag and generateThumbnail
+
     /** Check directory existing and create it if not
      *
      * @param $path
@@ -31,9 +39,6 @@ class Commons extends ConnectDB{
         return true;
     }
 
-
-
-// isAllowedPage deleteImage  напряму   (contentManag
 
     /** Check if user is logged in
      *

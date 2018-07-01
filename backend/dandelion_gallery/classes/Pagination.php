@@ -6,8 +6,12 @@
  * Time: 21:08
  */
 
-
-class Pagination extends Commons {
+/** Generate pagination
+ *
+ * Class Pagination
+ */
+class Pagination extends Commons
+{
 
     /** Generate pagination HTML
      *
@@ -43,6 +47,7 @@ class Pagination extends Commons {
         return ceil($result->fetchColumn(0) / self::IMAGE_COUNT);
     }
 
+
     /** Get last page number
      *
      * @return int
@@ -52,6 +57,7 @@ class Pagination extends Commons {
         return $this->getPageCount();
     }
 
+
     /** Get first page, first page is 1
      *
      * @return int
@@ -60,6 +66,7 @@ class Pagination extends Commons {
     {
         return 1;
     }
+
 
     /** Get next page number
      *
@@ -76,6 +83,7 @@ class Pagination extends Commons {
         }
     }
 
+
     /** Get previous page number
      *
      * @return bool|int
@@ -85,6 +93,7 @@ class Pagination extends Commons {
         return isset($_REQUEST['p']) && $_REQUEST['p'] > 1 ? $_REQUEST['p'] - 1 : false;
     }
 
+
     /** Get current page number
      *
      * @return int
@@ -93,11 +102,5 @@ class Pagination extends Commons {
     {
         return isset($_REQUEST['p']) ? $_REQUEST['p'] : 1;
     }
-
-
 }
-
-
-
-
 

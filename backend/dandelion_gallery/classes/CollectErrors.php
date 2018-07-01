@@ -6,7 +6,12 @@
  * Time: 21:06
  */
 
-class CollectErrors extends Commons{
+/** Contains methods for detecting, registering errors and correct displaying them
+ *
+ * Class CollectErrors
+ */
+class CollectErrors extends Commons
+{
 
     /** Get errors from request
      *
@@ -44,6 +49,7 @@ class CollectErrors extends Commons{
 
         return false;
     }
+
     /** Write error to log file
      *
      * @param $errorNo
