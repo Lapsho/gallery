@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июн 30 2018 г., 17:14
+-- Время создания: Июл 04 2018 г., 11:21
 -- Версия сервера: 5.6.39-83.1
 -- Версия PHP: 7.1.15-1+ubuntu16.04.1+deb.sury.org+2
 
@@ -32,6 +32,7 @@ CREATE TABLE `images` (
   `thumbnail_path` varchar(255) DEFAULT NULL,
   `description` text,
   `author_name` varchar(255) DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `user_id` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -40,17 +41,16 @@ CREATE TABLE `images` (
 -- Дамп данных таблицы `images`
 --
 
-INSERT INTO `images` (`id`, `image_path`, `thumbnail_path`, `description`, `author_name`, `created_at`, `user_id`) VALUES
-(27, 'content/media/images/1530367805Hydrangeas.jpg', 'content/media/thumbnails/1530367805Hydrangeas.jpg', 'sdg', 'sdfg', '2018-06-30 14:10:05', 7),
-(28, 'content/media/images/1530367871IMG_20150915_153920883_HDR.jpg', 'content/media/thumbnails/1530367871IMG_20150915_153920883_HDR.jpg', 'ag', 'af', '2018-06-30 14:11:11', 6),
-(29, 'content/media/images/1530367880Koala.jpg', 'content/media/thumbnails/1530367880Koala.jpg', 'adsf', 'afds', '2018-06-30 14:11:20', 6),
-(30, 'content/media/images/1530367888Lighthouse.jpg', 'content/media/thumbnails/1530367888Lighthouse.jpg', 'asdf', 'afsd', '2018-06-30 14:11:28', 6),
-(31, 'content/media/images/1530367896Jellyfish.jpg', 'content/media/thumbnails/1530367896Jellyfish.jpg', 'asdf', 'asdf', '2018-06-30 14:11:36', 6),
-(32, 'content/media/images/1530367904Penguins.jpg', 'content/media/thumbnails/1530367904Penguins.jpg', 'asfd', 'asfd', '2018-06-30 14:11:44', 6),
-(33, 'content/media/images/1530367912Desert.jpg', 'content/media/thumbnails/1530367912Desert.jpg', 'asdf', 'afsd', '2018-06-30 14:11:52', 6),
-(34, 'content/media/images/1530367920Tulips.jpg', 'content/media/thumbnails/1530367920Tulips.jpg', 'asdf', 'afd', '2018-06-30 14:12:01', 6),
-(35, 'content/media/images/1530367929Chrysanthemum.jpg', 'content/media/thumbnails/1530367929Chrysanthemum.jpg', 'asdf', 'afds', '2018-06-30 14:12:10', 6),
-(36, 'content/media/images/1530367938Penguins.jpg', 'content/media/thumbnails/1530367938Penguins.jpg', 'asdf', 'asdf', '2018-06-30 14:12:19', 6);
+INSERT INTO `images` (`id`, `image_path`, `thumbnail_path`, `description`, `author_name`, `category`, `created_at`, `user_id`) VALUES
+(63, 'content/media/images/1530660404Hydrangeas.jpg', 'content/media/thumbnails/1530660404Hydrangeas.jpg', 'sdg', 'dg', 'Art', '2018-07-03 23:26:45', 5),
+(64, 'content/media/images/1530660424Lighthouse.jpg', 'content/media/thumbnails/1530660424Lighthouse.jpg', 'rsth', 'htrs', 'Buildings', '2018-07-03 23:27:04', 5),
+(65, 'content/media/images/1530660437Chrysanthemum.jpg', 'content/media/thumbnails/1530660437Chrysanthemum.jpg', 'sh', 'shd', 'Macro', '2018-07-03 23:27:17', 5),
+(66, 'content/media/images/1530660451Penguins.jpg', 'content/media/thumbnails/1530660451Penguins.jpg', 'sgr', 'gsrd', 'Interior', '2018-07-03 23:27:32', 5),
+(67, 'content/media/images/1530660467Chrysanthemum.jpg', 'content/media/thumbnails/1530660467Chrysanthemum.jpg', 'sg', 'g', 'Wall', '2018-07-03 23:27:47', 5),
+(68, 'content/media/images/1530660481Desert.jpg', 'content/media/thumbnails/1530660481Desert.jpg', 'gr', 'g', 'Paisajes', '2018-07-03 23:28:01', 5),
+(69, 'content/media/images/1530660493IMG_20150915_153920883_HDR.jpg', 'content/media/thumbnails/1530660493IMG_20150915_153920883_HDR.jpg', 'rg', 'g', 'People', '2018-07-03 23:28:13', 5),
+(70, 'content/media/images/1530660505Tulips.jpg', 'content/media/thumbnails/1530660505Tulips.jpg', 'ersg', 'gr', 'Machinery', '2018-07-03 23:28:25', 5),
+(71, 'content/media/images/1530661305Chrysanthemum.jpg', 'content/media/thumbnails/1530661305Chrysanthemum.jpg', 'иав', 'ипа', 'Macro', '2018-07-03 23:41:45', 5);
 
 -- --------------------------------------------------------
 
@@ -101,7 +101,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --

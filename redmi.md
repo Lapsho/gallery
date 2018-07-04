@@ -2,7 +2,7 @@ Follow the next steps to launch the site:
 
 1) importh the dandelion_gallery.sql from directory /var;
 
-2) inside the /content directory create the /content/media/image 
+2) create the next directories: /content/media/images 
 and a /content/media/thumbnails folders.
 Also create error.log in directory /var;
 

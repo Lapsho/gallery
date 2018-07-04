@@ -25,8 +25,8 @@ class ContentManaging extends Commons
     {
         $thumbnail = new Thumbnail();
         $database = $this->connect();
-        $sql = 'INSERT INTO images(id, image_path, thumbnail_path, description, author_name, created_at, user_id)
-VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, CURRENT_TIMESTAMP(), :user_id)';
+        $sql = 'INSERT INTO images(id, image_path, thumbnail_path, description, author_name, category, created_at, user_id)
+VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, :category, CURRENT_TIMESTAMP(), :user_id)';
         if ($filename = $this->uploadFile($_FILES['image'])) {
             $width = 348;
             $height = 0;
@@ -35,6 +35,7 @@ VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, CURRENT_T
                 ':thumbnail_path' => $thumbnail->generateThumbnail($filename, $width, $height),
                 ':description' => $_REQUEST['description'],
                 ':author_name' => $_REQUEST['authorname'],
+                ':category' => $_REQUEST['category'],
                 ':user_id' => $_SESSION['auth'],
             ];
             $this->request($database, $sql, $params);
