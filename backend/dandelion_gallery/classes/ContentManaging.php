@@ -80,18 +80,27 @@ VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, :category
     {
         $errors = array();
 
-        if (empty($data['authorname']) || strlen($data['authorname']) > 40) {
+        if (strlen($data['authorname']) > 40) {
             $errors[] = 'Author shouldn\'t be empty or more 40 characters';
         }
 
-        if (empty($data['description']) || strlen($data['description']) > 255) {
-            $errors[] = 'Description shouldn\'t be empty or more 255 characters';
+        if (empty($data['description']) || strlen($data['description']) > 250) {
+            $errors[] = 'Description shouldn\'t be empty or more 250 characters';
         }
         if (empty($_FILES)) {
             $errors[] = 'You should choose file';
         }
+        if (htmlentities($data['authorname']) != $data['authorname']) {
+            $errors[] = 'The author may only contain letters, numbers, and punctuation marks';
+        }
+        if (htmlentities($data['description']) != $data['description']) {
+            $errors[] = 'The description may only contain letters, numbers, and punctuation marks';
+        }
+        if (empty($data['category'])) {
+            $errors[] = 'Category shouldn\'t be empty';
+        }
         if (!in_array(getimagesize($_FILES['image']['tmp_name'])['mime'], ['image/jpeg', 'image/png', 'image/gif'])) {
-            $errors[] = 'File should be JPEG, PNG, GIF';
+            $errors[] = 'File should be JPEG, PNG, GIF and shouldn\'t be empty';
         }
 
         if (!empty($errors)) {

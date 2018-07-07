@@ -52,8 +52,10 @@ class Collection extends Commons
         $database = $this->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
-        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, category, created_at, login, user_id FROM images
+        $sql = "
+SELECT images.id, image_path, thumbnail_path, author_name, description, category, created_at, login, user_id FROM images
 LEFT JOIN users on images.user_id = users.id
+ORDER BY created_at DESC
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $result = $this->request($database, $sql);
         $images = [];
@@ -82,8 +84,11 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $database = $this->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
-        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, category, created_at, login, user_id FROM images
-LEFT JOIN users on images.user_id = users.id WHERE images.user_id = " . $_SESSION['auth'] . "
+        $sql = "
+SELECT images.id, image_path, thumbnail_path, author_name, description, category, created_at, login, user_id 
+FROM images LEFT JOIN users on images.user_id = users.id 
+WHERE images.user_id = " . $_SESSION['auth'] . "
+ORDER BY created_at DESC
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $result = $this->request($database, $sql);
         $images = [];
@@ -111,8 +116,11 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $database = $this->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
-        $sql = "SELECT images.id, image_path, thumbnail_path, author_name, description, category, created_at, login, user_id FROM images
-LEFT JOIN users on images.user_id = users.id WHERE images.category = " . "'" . $_SESSION['switch_collections'] . "'" . "
+        $sql = "
+SELECT images.id, image_path, thumbnail_path, author_name, description, category, created_at, login, user_id FROM images
+LEFT JOIN users on images.user_id = users.id 
+WHERE images.category = " . "'" . $_SESSION['switch_collections'] . "'" . "
+ORDER BY created_at DESC
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
         $result = $this->request($database, $sql);
         $images = [];
@@ -144,7 +152,7 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
                 if ($imageA['created_at'] == $imageB['created_at']) {
                     return 0;
                 }
-                return ($imageA['created_at'] > $imageB['created_at']) ? -1 : 1;
+                return ($imageA['created_at'] < $imageB['created_at']) ? +1 : -1;
             });
         }
     }

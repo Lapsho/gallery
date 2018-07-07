@@ -25,15 +25,10 @@
                     <div class="form-group">
                         <label for="inputState">Category</label>
                         <select id="inputState" class="form-control" name="category">
-                            <option value="Another">Another</option>
-                            <option value="Art">Art</option>
-                            <option value="Buildings">Buildings</option>
-                            <option value="Macro">Macro</option>
-                            <option value="Interior">Interior</option>
-                            <option value="Wall">Wall</option>
-                            <option value="Paisajes">Paisajes</option>
-                            <option value="People">People</option>
-                            <option value="Machinery">Machinery</option>
+                            <option><?php echo $collectErrors->getFieldValue('category') ?></option>
+                            <?php foreach(Commons::CATEGORY_LIST as $category): ?>
+                                <option value="<?php echo $category ?>"><?php echo $category ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">

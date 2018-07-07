@@ -39,6 +39,11 @@ body {
 	width: 100%;
 }
 
+.chosen-category {
+	position: fixed;
+
+}
+
 .btn-head-group {
 	width: 100;
 }

@@ -43,9 +43,25 @@ class Pagination extends Commons
     protected function getPageCount()
     {
         $database = $this->connect();
-        $result = $this->request($database, 'SELECT COUNT(id) FROM images');
+
+        if($_SESSION['switch_collections'] == "all"){
+            $result = $this->request($database, 'SELECT COUNT(id) FROM images');
+        }elseif($_SESSION['switch_collections'] == "own"){
+            $result = $this->request(
+                $database,
+                'SELECT COUNT(id) FROM images WHERE user_id = :auth',
+                ['auth' => $_SESSION['auth']]
+            );
+        }elseif (in_array($_SESSION['switch_collections'],Commons::CATEGORY_LIST)){
+            $result = $this->request(
+                $database,
+                'SELECT COUNT(id) FROM images WHERE category = :category',
+                ['category' => $_SESSION['switch_collections']]
+            );
+        }
+
         return ceil($result->fetchColumn(0) / self::IMAGE_COUNT);
-    }
+}
 
 
     /** Get last page number

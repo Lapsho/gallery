@@ -24,6 +24,20 @@ class Commons extends ConnectDB
     const CSS_PATH = 'backend/dandelion_gallery/helpers/css.php';
     /** contain href to fancybox files */
     const FANCYBOX_PATH = 'backend/dandelion_gallery/helpers/fancybox.php';
+    /** contains a reference to the files js that are necessary for bootstrap */
+    const BOOTSTRAP_JS = 'backend/dandelion_gallery/helpers/bootstarp_js.php';
+    /** contains a list with categories images (! without 'own' and 'all') */
+    const CATEGORY_LIST = array(
+        'Another',
+        'Art',
+        'Buildings',
+        'Macro',
+        'Interior',
+        'Wall',
+        'Paisajes',
+        'People',
+        'Machinery'
+        );
 
 
     /** Check directory existing and create it if not
