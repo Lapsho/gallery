@@ -39,6 +39,7 @@ class App
                 break;
             case 'submit':
                 $user = new ContentManaging();
+                $connectDB = new ConnectDB();
                 require('backend/dandelion_gallery/helpers/process.php');
                 break;
             case 'login':
@@ -50,6 +51,7 @@ class App
                 require('backend/dandelion_gallery/helpers/logout.php');
                 break;
             case 'processLogin':
+                $connectDB = new ConnectDB();
                 $user = new User();
                 require('backend/dandelion_gallery/helpers/processLogin.php');
                 break;
@@ -58,17 +60,20 @@ class App
                 require('pages/register.php');
                 break;
             case 'processRegister':
+                $connectDB = new ConnectDB();
                 $user = new User();
                 require('backend/dandelion_gallery/helpers/processRegister.php');
                 break;
             case 'removeImage':
                 $user = new ContentManaging();
+                $connectDB = new ConnectDB();
                 require('backend/dandelion_gallery/helpers/removeImage.php');
                 break;
             case 'switchCollections':
                 require('backend/dandelion_gallery/helpers/switchCollections.php');
                 break;
             default:
+                $connectDB = new ConnectDB();
                 $collectErrors = new CollectErrors();
                 $getCollection = new Collection();
                 $pagination = new Pagination();

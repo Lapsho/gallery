@@ -17,19 +17,19 @@ class Pagination extends Commons
      *
      * @return string
      */
-    public function renderPagination()
+    public function renderPagination($connectDB)
     {
         $paginationHtml = '';
-        if ($this->getPageCount() > 1) {
+        if ($this->getPageCount($connectDB) > 1) {
             $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . $this->getFirstPage() . "'>Go to first page</a></li>";
             if ($prevPage = $this->getPrevPage()) {
                 $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . $prevPage . "'>" . $prevPage . "</a></li>";
             }
             $paginationHtml .= "<li class='page-item active'><a class='page-link' href='#'>" . $this->getCurrentPage() . "</a></li>";
-            if ($nextPage = $this->getNextPage()) {
+            if ($nextPage = $this->getNextPage($connectDB)) {
                 $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . $nextPage . "'>" . $nextPage . "</a></li>";
             }
-            $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . $this->getLastPage() . "'>Go to last page</a></li>";
+            $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . $this->getLastPage($connectDB) . "'>Go to last page</a></li>";
         }
 
         return $paginationHtml;
@@ -40,20 +40,20 @@ class Pagination extends Commons
      *
      * @return float|int
      */
-    protected function getPageCount()
+    protected function getPageCount($connectDB)
     {
-        $database = $this->connect();
+        $database = $connectDB->connect();
 
-        if($_SESSION['switch_collections'] == "all"){
-            $result = $this->request($database, 'SELECT COUNT(id) FROM images');
-        }elseif($_SESSION['switch_collections'] == "own"){
-            $result = $this->request(
+        if ($_SESSION['switch_collections'] == "all") {
+            $result = $connectDB->request($database, 'SELECT COUNT(id) FROM images');
+        } elseif ($_SESSION['switch_collections'] == "own") {
+            $result = $connectDB->request(
                 $database,
                 'SELECT COUNT(id) FROM images WHERE user_id = :auth',
                 ['auth' => $_SESSION['auth']]
             );
-        }elseif (in_array($_SESSION['switch_collections'],Commons::CATEGORY_LIST)){
-            $result = $this->request(
+        } elseif (in_array($_SESSION['switch_collections'], Commons::CATEGORY_LIST)) {
+            $result = $connectDB->request(
                 $database,
                 'SELECT COUNT(id) FROM images WHERE category = :category',
                 ['category' => $_SESSION['switch_collections']]
@@ -61,16 +61,16 @@ class Pagination extends Commons
         }
 
         return ceil($result->fetchColumn(0) / self::IMAGE_COUNT);
-}
+    }
 
 
     /** Get last page number
      *
      * @return int
      */
-    protected function getLastPage(): int
+    protected function getLastPage($connectDB): int
     {
-        return $this->getPageCount();
+        return $this->getPageCount($connectDB);
     }
 
 
@@ -88,9 +88,9 @@ class Pagination extends Commons
      *
      * @return bool|int
      */
-    protected function getNextPage()
+    protected function getNextPage($connectDB)
     {
-        if (isset($_REQUEST['p']) && $this->getPageCount() <= $_REQUEST['p']) {
+        if (isset($_REQUEST['p']) && $this->getPageCount($connectDB) <= $_REQUEST['p']) {
             return false;
         } elseif (isset($_REQUEST['p'])) {
             return $_REQUEST['p'] + 1;

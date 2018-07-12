@@ -16,7 +16,8 @@
         <form action="/processRegister" method="post">
             <div class="form-group">
                 <label for="login">Enter Login</label>
-                <input type="text" class="form-control" id="login" name="login" value="<?php echo $collectErrors->getFieldValue('login') ?>">
+                <input type="text" class="form-control" id="login" name="login"
+                       value="<?php echo $collectErrors->getFieldValue('login') ?>">
             </div>
             <div class="form-group">
                 <label for="pass">Enter Password</label>

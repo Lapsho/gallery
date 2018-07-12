@@ -19,11 +19,11 @@ class Collection extends Commons
      *
      * @return array|mixed
      */
-    public function switchCollections()
+    public function switchCollections($connectDB)
     {
         switch ($_SESSION['switch_collections']) {
             case 'own':
-                return $this->getOwnCollection();
+                return $this->getOwnCollection($connectDB);
                 break;
             case 'Another':
             case 'Art':
@@ -34,10 +34,10 @@ class Collection extends Commons
             case 'Paisajes':
             case 'People':
             case 'Machinery':
-                return $this->getCategory();
+                return $this->getCategory($connectDB);
                 break;
             default:
-                return $this->getCollection();
+                return $this->getCollection($connectDB);
                 break;
         }
     }
@@ -47,9 +47,9 @@ class Collection extends Commons
      *
      * @return mixed
      */
-    public function getCollection()
+    public function getCollection($connectDB)
     {
-        $database = $this->connect();
+        $database = $connectDB->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
         $sql = "
@@ -57,7 +57,7 @@ SELECT images.id, image_path, thumbnail_path, author_name, description, category
 LEFT JOIN users on images.user_id = users.id
 ORDER BY created_at DESC
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
-        $result = $this->request($database, $sql);
+        $result = $connectDB->request($database, $sql);
         $images = [];
         if ($result->rowCount() > 0) {
             foreach ($result->fetchAll() as $value) {
@@ -79,9 +79,9 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
      *
      * @return array
      */
-    public function getOwnCollection()
+    public function getOwnCollection($connectDB)
     {
-        $database = $this->connect();
+        $database = $connectDB->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
         $sql = "
@@ -90,7 +90,7 @@ FROM images LEFT JOIN users on images.user_id = users.id
 WHERE images.user_id = " . $_SESSION['auth'] . "
 ORDER BY created_at DESC
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
-        $result = $this->request($database, $sql);
+        $result = $connectDB->request($database, $sql);
         $images = [];
         if ($result->rowCount() > 0) {
             foreach ($result->fetchAll() as $value) {
@@ -111,9 +111,9 @@ LIMIT " . $offset . ", " . self::IMAGE_COUNT;
      *
      * @return array
      */
-    public function getCategory()
+    public function getCategory($connectDB)
     {
-        $database = $this->connect();
+        $database = $connectDB->connect();
         $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         $offset = $offset * self::IMAGE_COUNT;
         $sql = "
@@ -122,7 +122,7 @@ LEFT JOIN users on images.user_id = users.id
 WHERE images.category = " . "'" . $_SESSION['switch_collections'] . "'" . "
 ORDER BY created_at DESC
 LIMIT " . $offset . ", " . self::IMAGE_COUNT;
-        $result = $this->request($database, $sql);
+        $result = $connectDB->request($database, $sql);
         $images = [];
         if ($result->rowCount() > 0) {
             foreach ($result->fetchAll() as $value) {

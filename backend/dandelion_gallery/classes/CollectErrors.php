@@ -12,6 +12,9 @@
  */
 class CollectErrors extends Commons
 {
+    /** way to error file */
+    const ERROR_LOG = 'var/error.log';
+
 
     /** Get errors from request
      *

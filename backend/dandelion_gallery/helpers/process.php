@@ -3,7 +3,7 @@
 $request = $_REQUEST;
 
 if (($valid = $user->validateUpload($request)) === true) {
-    if ($user->save()) {
+    if ($user->save($connectDB)) {
         header('Location: /');
     } else {
         header('Location: /form?' . http_build_query(array('errors[]' => 'Something went wrong')));

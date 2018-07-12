@@ -44,7 +44,7 @@
                     By category
                 </button>
                 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                    <?php foreach(Commons::CATEGORY_LIST as $category): ?>
+                    <?php foreach (Commons::CATEGORY_LIST as $category): ?>
                         <button type="submit" class="btn dropdown-item" name="display" value=<?php echo $category ?>>
                             <?php echo $category ?>
                         </button>
@@ -52,8 +52,6 @@
                 </div>
             </form>
         </div>
-
-
     </div>
     <?php if ($messages = $collectErrors->getMessages()): ?>
         <div class="alert alert-warning">
@@ -61,15 +59,15 @@
         </div>
     <?php endif; ?>
     <div class="contain">
-        <?php if (!empty($images = $getCollection->switchCollections())): ?>
+        <?php if (!empty($images = $getCollection->switchCollections($connectDB))): ?>
             <?php foreach ($images as $image): ?>
                 <div class="image-container">
                     <div class="img-thumbnail">
                         <a data-fancybox='images' href="<?php echo $image['image_path']; ?>">
-                            <img src="<?php echo $image['thumbnail_path']; ?>" />
+                            <img src="<?php echo $image['thumbnail_path']; ?>"/>
                         </a>
                         <p>
-                            <?php if($image['author_name'] != ''): ?>
+                            <?php if ($image['author_name'] != ''): ?>
                                 Author: <i><?php echo $image['author_name'] ?>,</i></br>
                             <?php endif ?>
                             Description: <i><?php echo $image['description'] ?>,</i></br>
@@ -77,12 +75,10 @@
                             Owner: <i><?php echo $image['login'] ?></i></br>
                             Created at: <i><?php echo $image['created_at'] ?></i></br>
                         </p>
-                        <?php if (($_SESSION['auth'] === $image['user_id']) or ($_SESSION['access'] === 'admin')): ?>
+                        <?php if ((isset($_SESSION['auth']) == $image['user_id']) or (isset($_SESSION['access']) == 'admin')): ?>
                             <button type="button" class="btn btn-warning btn-block"
                                     onclick="if (confirm('Are you sure?'))
-                                    {
-                                        location.href = '/removeImage?id=<?php echo $image['id'] ?>';
-                                    }">
+                                            {location.href = '/removeImage?id=<?php echo $image['id'] ?>';}">
                                 Delete
                             </button>
                         <?php endif; ?>
@@ -92,8 +88,8 @@
         <?php else: ?>
             </br>
             <div class="image-center">
-                <img src="<?php echo Collection::NO_IMAGES; ?>" />
-                <?php if(in_array($_SESSION['switch_collections'],Commons::CATEGORY_LIST)): ?>
+                <img src="<?php echo Collection::NO_IMAGES; ?>"/>
+                <?php if (in_array($_SESSION['switch_collections'], Commons::CATEGORY_LIST)): ?>
                     <h3 class="font-title">
                         <i>In the category "<?php echo $_SESSION['switch_collections'] ?>" there are no images yet</i>
                     </h3>
@@ -106,11 +102,11 @@
     <div class="position-bottom">
         <nav>
             <ul class="pagination justify-content-center">
-                <?php echo $pagination->renderPagination() ?>
+                <?php echo $pagination->renderPagination($connectDB) ?>
             </ul>
         </nav>
     </div>
-    </div>
+</div>
 </div>
 </body>
 </html>

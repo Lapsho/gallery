@@ -11,7 +11,7 @@
  *
  * Class Commons
  */
-class Commons extends ConnectDB
+class Commons
 {
 
     /** name site */
@@ -37,7 +37,7 @@ class Commons extends ConnectDB
         'Paisajes',
         'People',
         'Machinery'
-        );
+    );
 
 
     /** Check directory existing and create it if not

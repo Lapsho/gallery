@@ -7,7 +7,7 @@
  */
 
 // login, logout, authorize user
-class User extends ConnectDB
+class User
 {
     /** Authorize user
      *
@@ -15,11 +15,17 @@ class User extends ConnectDB
      * @param $postPass
      * @return bool
      */
-    public function authUser($postUser, $postPass)
+    public function authUser($postUser, $postPass, $connectDB)
     {
-        $database = $this->connect();
+        $database = $connectDB->connect();
         $pass = crypt($postPass, $postUser);
-        $result = $this->request($database, 'SELECT id, access FROM users WHERE login = :login AND password = :pass', [':login' => $postUser, ':pass' => $pass]);
+        $result = $connectDB->request
+        (
+            $database,
+            'SELECT id, access FROM users WHERE login = :login AND password = :pass',
+            [':login' => $postUser, ':pass' => $pass]
+        );
+
         if ($result->rowCount() == 1) {
             $respond = $result->fetchAll();
             $_SESSION['auth'] = $respond[0][0];
@@ -70,11 +76,11 @@ class User extends ConnectDB
      * @param $pass
      * @return bool
      */
-    public function createUser($login, $pass)
+    public function createUser($login, $pass, $connectDB)
     {
         $pass = crypt($pass, $login);
-        $database = $this->connect();
-        if ($this->request($database, 'INSERT INTO users(id, login, password) VALUES(NULL, :login, :pass)', array(':login' => $login, ':pass' => $pass))) {
+        $database = $connectDB->connect();
+        if ($connectDB->request($database, 'INSERT INTO users(id, login, password) VALUES(NULL, :login, :pass)', array(':login' => $login, ':pass' => $pass))) {
             $_SESSION['auth'] = $database->lastInsertId();
             $_SESSION['messages'][] = 'Your account has been created';
             return true;

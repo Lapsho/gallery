@@ -12,8 +12,6 @@
  */
 class ConnectDB
 {
-    /** way to error file */
-    const ERROR_LOG = 'var/error.log';
     /** project config file */
     const CONFIG_FILE = 'var/config.ini';
 
@@ -30,11 +28,11 @@ class ConnectDB
                 throw new Exception('Config file is not exist');
             }
         } catch (PDOException $exception) {
-            error_log($exception->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . self::ERROR_LOG);
+            error_log($exception->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . CollectErrors::ERROR_LOG);
             echo 'Could not connect to DB';
             exit;
         } catch (Exception $exception) {
-            error_log($exception->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . self::ERROR_LOG);
+            error_log($exception->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . CollectErrors::ERROR_LOG);
             echo 'Could not connect to DB';
             exit;
         }
@@ -52,7 +50,7 @@ class ConnectDB
         $query = $database->prepare($sql);
         $result = $query->execute($params);
         if ($result === false) {
-            error_log($query->errorInfo()[2], 3, $_SERVER['DOCUMENT_ROOT'] . self::ERROR_LOG);
+            error_log($query->errorInfo()[2], 3, $_SERVER['DOCUMENT_ROOT'] . CollectErrors::ERROR_LOG);
             return false;
         }
 

@@ -21,10 +21,10 @@ class ContentManaging extends Commons
      * @return bool
      * @throws Exception
      */
-    public function save()
+    public function save($connectDB)
     {
         $thumbnail = new Thumbnail();
-        $database = $this->connect();
+        $database = $connectDB->connect();
         $sql = 'INSERT INTO images(id, image_path, thumbnail_path, description, author_name, category, created_at, user_id)
 VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, :category, CURRENT_TIMESTAMP(), :user_id)';
         if ($filename = $this->uploadFile($_FILES['image'])) {
@@ -38,7 +38,7 @@ VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, :category
                 ':category' => $_REQUEST['category'],
                 ':user_id' => $_SESSION['auth'],
             ];
-            $this->request($database, $sql, $params);
+            $connectDB->request($database, $sql, $params);
 
             $_SESSION['messages'] = ['You have uploaded new image'];
             unset($_SESSION['fields']);
@@ -118,12 +118,12 @@ VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, :category
      * @param $id
      * @return bool
      */
-    public function deleteImage($id)
+    public function deleteImage($id, $connectDB)
     {
         if ($this->isLoggedIn()) {
-            $database = $this->connect();
-            $image = $this->request($database, "SELECT image_path, thumbnail_path FROM images WHERE id = :id", [':id' => $id]);
-            $this->request($database, "DELETE FROM images WHERE id = :id", [':id' => $id]);
+            $database = $connectDB->connect();
+            $image = $connectDB->request($database, "SELECT image_path, thumbnail_path FROM images WHERE id = :id", [':id' => $id]);
+            $connectDB->request($database, "DELETE FROM images WHERE id = :id", [':id' => $id]);
             $patch = $image->fetchAll();
             unlink($patch[0][0]);     //delete image
             unlink($patch[0][1]);     //delete thumbnail
