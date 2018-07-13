@@ -17,7 +17,7 @@ class Commons
     /** name site */
     const PAGE_TITLE = 'Dandelion Gallery';
     /** image qty on page */
-    const IMAGE_COUNT = 9;
+    const IMAGE_COUNT = 10;
     /** defined image placeholder  */
     const IMAGE_PLACEHOLDER = '/frontend/program_images/placeholder.png';
     /** contain href to all css files */

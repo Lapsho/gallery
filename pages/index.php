@@ -75,7 +75,7 @@
                             Owner: <i><?php echo $image['login'] ?></i></br>
                             Created at: <i><?php echo $image['created_at'] ?></i></br>
                         </p>
-                        <?php if ((isset($_SESSION['auth']) == $image['user_id']) or (isset($_SESSION['access']) == 'admin')): ?>
+                        <?php if ($_SESSION['auth'] === $image['user_id'] || $_SESSION['access'] === 'admin'): ?>
                             <button type="button" class="btn btn-warning btn-block"
                                     onclick="if (confirm('Are you sure?'))
                                             {location.href = '/removeImage?id=<?php echo $image['id'] ?>';}">
@@ -106,7 +106,6 @@
             </ul>
         </nav>
     </div>
-</div>
 </div>
 </body>
 </html>
